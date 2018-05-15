@@ -120,6 +120,9 @@ by Prelude.")
 (message "Loading Prelude's modules...")
 
 (add-to-list 'load-path "~/.emacs.d/my-modules/el-supercollider/el")
+(add-to-list 'load-path "~/.emacs.d/my-modules/org-reveal")
+(require 'ox-reveal)
+(setq org-reveal-root "")
 (require 'sclang)
 ;; the modules
 (if (file-exists-p prelude-modules-file)
@@ -212,6 +215,7 @@ by Prelude.")
 ;;     smtpmail-stream-type 'starttls
 ;;     smtpmail-default-smtp-server "smtp.gmail.com"
 ;;     smtpmail-smtp-server "smtp.gmail.com"
+(require 'package)
 ;;     smtpmail-smtp-service 587)
 ;; don't keep message buffers around
 (setq message-kill-buffer-on-exit t)
@@ -225,25 +229,29 @@ by Prelude.")
          (local-set-key (kbd "k") 'pdf-view-previous-line-or-previous-page)
          (local-set-key (kbd "J") 'pdf-view-next-page)
          (local-set-key (kbd "K") 'pdf-view-previous-page)
-         (local-set-key (kbd "TAB") 'pdf-outline)))
+         (local-set-key (kbd "TAB") 'pdf-outline)
+         (local-set-key (kbd "/") 'isearch-forward)))
 
 
 (add-hook 'pdf-tools-enabled-hook 'evil-bindings-pdf-tools)
 
-(load-theme 'solarized-dark t)
-(defun switch-theme()
-  (interactive)
-  (let ((is-light (member 'solarized-dark custom-enabled-themes)))
-      (progn
-        (mapc 'disable-theme custom-enabled-themes)
-        (if  is-light
-            (load-theme 'solarized-light)
-         (load-theme 'solarized-dark)))))
-
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/notmuch/")
 (require 'notmuch)
 (global-set-key (kbd "<f6>") 'org-journal-new-entry)
-
+;;lilypond mode
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/")
+(require 'lilypond-mode)
 (add-hook 'org-mode-hook 'auto-fill-mode)
+(plist-put org-format-latex-options :scale 1.5)
 (add-hook 'text-mode-hook 'auto-fill-mode)
-;;; init.el ends here
+
+(setq projectile-switch-project-action 'projectile-dired)
+(setq notmuch-search-oldest-first nil)
+
+(ido-vertical-mode t)
+(toggle-scroll-bar -1)
+(setq prelude-whitespace nil)
+(linum-mode 1)
+(ranger-override-dired-mode t)
+(ranger-)
+;; init.el ends here

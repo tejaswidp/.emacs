@@ -39,4 +39,3 @@
 (require 'prelude-xml)
 ;; (require 'prelude-yaml)
 (require 'init-sclang)
-(require 'init-gnus)
