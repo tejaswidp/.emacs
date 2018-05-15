@@ -1,0 +1,33 @@
+* About
+  Inspired by other init.el files written in org-mode and burdened by
+  my existing configuration, I've decided to write mine as an org-file
+  too.
+* How it works
+  init.el loads this file using org-babel by
+  ~(require 'org)~
+  ~(org-babel-load-file~
+  ~(expand-file-name "init.org"~
+                     ~user-emacs-directory))~
+                     bootstrap.el installs all packages I use
+* Installation
+  To install, clone the git hub repository
+  https://github.com/widp/.emacs.d/
+  to ~/.emacs.d/
+* TODO Theme
+  #+BEGIN_SRC emacs-lisp
+    (load-theme 'solarized)
+  #+END_SRC
+* TODO Projectile
+
+* TODO Look at existing packages that you use and port them
+  Candidates
+    - Org interleave
+    - pdf tools keybindings
+    - not much email
+    - theme switcher
+    - sclang emacs package
+* TODO Org mode, org-journal etc
+  #+BEGIN_SRC emacs-lisp
+    (setq org-agenda-files
+       (directory-files-recursively "~/Documents/org_files/"))
+  #+END_SRC

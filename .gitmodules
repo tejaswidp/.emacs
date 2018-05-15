@@ -1,0 +1,10 @@
+[submodule "org-reveal"]
+	path = my-modules/org-reveal
+	url = https://github.com/yjwen/org-reveal
+[submodule "reveal.js"]
+	path = my-modules/reveal.js
+	url = https://github.com/hakimel/reveal.js
+[submodule "el-supercollider"]
+	path = my-modules/el-supercollider
+	url = https://github.com/widp/el-supercollider
+
