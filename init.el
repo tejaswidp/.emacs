@@ -86,6 +86,8 @@ by Prelude.")
 
 ;; add Prelude's directories to Emacs's `load-path'
 (add-to-list 'load-path prelude-core-dir)
+
+
 (add-to-list 'load-path prelude-modules-dir)
 (add-to-list 'load-path prelude-vendor-dir)
 (prelude-add-subfolders-to-load-path prelude-vendor-dir)
@@ -119,12 +121,6 @@ by Prelude.")
 
 (message "Loading Prelude's modules...")
 
-(add-to-list 'load-path "~/.emacs.d/my-modules/el-supercollider/el")
-(add-to-list 'load-path "~/.emacs.d/my-modules/org-reveal")
-(require 'ox-reveal)
-(setq org-reveal-root "")
-(require 'sclang)
-;; the modules
 (if (file-exists-p prelude-modules-file)
     (load prelude-modules-file)
   (message "Missing modules file %s" prelude-modules-file)
@@ -149,109 +145,4 @@ by Prelude.")
 (prelude-eval-after-init
  ;; greet the use with some useful tip
  (run-at-time 5 nil 'prelude-tip-of-the-day))
-
-(setq python-python-command "/usr/bin/python3")
-(require 'ob-python)
-
-;;TODO eventually migrate to ~/newinit.org
-
-(require 'evil)
-(evil-mode 1)
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-(require 'mu4e)
-(setq mu4e-maildir "/home/tejaswidp/Maildir/")
-(setq mu4e-drafts-folder "/[Gmail].Drafts")
-(setq mu4e-sent-folder   "/[Gmail].Sent Mail")
-(setq mu4e-trash-folder  "/[Gmail].Trash")
-
-;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-(setq mu4e-sent-messages-behavior 'delete)
-
-;; (See the documentation for `mu4e-sent-messages-behavior' if you have
-;; additional non-Gmail addresses and want assign them different
-;; behavior.)
-
-;; setup some handy shortcuts
-;; you can quickly switch to your Inbox -- press ``ji''
-;; then, when you want archive some messages, move them to
-;; the 'All Mail' folder by pressing ``ma''.
-
-(setq mu4e-maildir-shortcuts
-    '( ("/INBOX"               . ?i)
-       ("/[Gmail].Sent Mail"   . ?s)
-       ("/[Gmail].Trash"       . ?t)
-       ("/[Gmail].All Mail"    . ?a)))
-
-;; allow for updating mail using 'U' in the main view:
-(setq mu4e-get-mail-command "offlineimap"
-      mu4e-update-interval 300)
-
-
-;; something about ourselves
-(setq
-   user-mail-address "tejaswidprakash@gmail.com"
-   user-full-name  "Tejaswi D. Prakash"
-   mu4e-compose-signature
-    (concat
-      "Tejaswi D. Prakash\n"
-      "https://tejaswidp.me"))
-
-;; sending mail -- replace USERNAME with your gmail username
-;; also, make sure the gnutls command line utils are installed
-;; package 'gnutls-bin' in Debian/Ubuntu
-
-(require 'smtpmail)
-(setq message-send-mail-function 'smtpmail-send-it
-   starttls-use-gnutls t
-   smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-   smtpmail-auth-credentials
-     '(("smtp.gmail.com" 587 "tejaswidprakash@gmail.com" nil))
-   smtpmail-default-smtp-server "smtp.gmail.com"
-   smtpmail-smtp-server "smtp.gmail.com"
-   smtpmail-smtp-service 587)
-
-;; alternatively, for emacs-24 you can use:
-;;(setq message-send-mail-function 'smtpmail-send-it
-;;     smtpmail-stream-type 'starttls
-;;     smtpmail-default-smtp-server "smtp.gmail.com"
-;;     smtpmail-smtp-server "smtp.gmail.com"
-(require 'package)
-;;     smtpmail-smtp-service 587)
-;; don't keep message buffers around
-(setq message-kill-buffer-on-exit t)
-
-(global-set-key (kbd "M-x") 'smex)
-;;pdf-tools
-(pdf-tools-install)
-(defun evil-bindings-pdf-tools ()
-  "Simple evil key bindings for pdf-tools."
-  (progn (local-set-key (kbd "j") 'pdf-view-next-line-or-next-page)
-         (local-set-key (kbd "k") 'pdf-view-previous-line-or-previous-page)
-         (local-set-key (kbd "J") 'pdf-view-next-page)
-         (local-set-key (kbd "K") 'pdf-view-previous-page)
-         (local-set-key (kbd "TAB") 'pdf-outline)
-         (local-set-key (kbd "/") 'isearch-forward)))
-
-
-(add-hook 'pdf-tools-enabled-hook 'evil-bindings-pdf-tools)
-
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/notmuch/")
-(require 'notmuch)
-(global-set-key (kbd "<f6>") 'org-journal-new-entry)
-;;lilypond mode
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/")
-(require 'lilypond-mode)
-(add-hook 'org-mode-hook 'auto-fill-mode)
-(plist-put org-format-latex-options :scale 1.5)
-(add-hook 'text-mode-hook 'auto-fill-mode)
-
-(setq projectile-switch-project-action 'projectile-dired)
-(setq notmuch-search-oldest-first nil)
-
-(ido-vertical-mode t)
-(toggle-scroll-bar -1)
-(setq prelude-whitespace nil)
-(linum-mode 1)
-(ranger-override-dired-mode t)
-(ranger-)
 ;; init.el ends here

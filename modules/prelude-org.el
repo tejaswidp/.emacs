@@ -38,8 +38,7 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (setq org-log-done t)
 ;;set agenda files
-(let ((removal-list (list "/home/tejaswidp/Documents/uni_research/universities/germany/uni-agenda.org")))
-  (setq org-agenda-files (cl-set-difference (directory-files-recursively "~/Documents/uni_research" "\.org$") removal-list :test #'string=)))
+(setq org-agenda-files (directory-files-recursively "~/Documents/uni_research" "\.org$") )
 (defun prelude-org-mode-defaults ()
   (let ((oldmap (cdr (assoc 'prelude-mode minor-mode-map-alist)))
         (newmap (make-sparse-keymap)))
