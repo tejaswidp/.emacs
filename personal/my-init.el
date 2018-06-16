@@ -44,10 +44,17 @@
 
 (add-hook 'prog-mode-hook 'linum-mode)
 
-(ranger-override-dired-mode t)
-
 ;;some clipboard stuff
 (setq x-select-enable-clipboard t)
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
-(setq browse-url-browser-function 'browse-url-chrome)
 (modify-coding-system-alist 'file ".txt'" 'utf-8)
+(setq projectile-switch-project-action 'projectile-dired)
+;;open projects file
+(find-file "~/Documents/uni_research/Projects.org")
+(setq browse-url-browser-function 'browse-url-chrome)
+(eval-after-load 'projectile
+                    '(define-key projectile-mode-map (kbd "C-c p a") (lambda () (interactive) (helm-ag))))
+
+(eval-after-load 'evil
+                    '(define-key projectile-mode-map (kbd "C-a") (lambda () (interactive) (evil-numbers/inc-at-pt 1 nil))))
+(global-set-key (kbd "C-c C-j")  (lambda () (interactive) (org-journal-new-entry nil )))
