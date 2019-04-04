@@ -1,16 +1,19 @@
+;;Temporary stuff goes in here;;
+;;-------------------------------
 (add-to-list 'load-path "~/.emacs.d/my-modules/el-supercollider/el")
 (add-to-list 'load-path "~/.emacs.d/my-modules/org-reveal")
 (require 'ox-reveal)
 (setq org-reveal-root "")
+
 (require 'sclang)
 
-(setq python-python-command "/usr/bin/python3")
-(require 'ob-python)
+(require 'python)
+(when (executable-find "ipython")
+  (setq python-shell-interpreter "ipython3")
+   ( setenv "IPY_TEST_SIMPLE_PROMPT" "1"))
 
 ;;TODO eventually migrate to ~/newinit.org
 
-(require 'evil)
-(evil-mode 1)
 (require 'package)
 ;;     smtpmail-smtp-service 587)
 ;; don't keep message buffers around
@@ -22,18 +25,8 @@
 (add-to-list 'load-path "/usr/share/emacs/site-lisp/")
 
 (require 'lilypond-mode)
-(require 'org)
-(require 'ob-core)
-(require 'ob-emacs-lisp)
-(add-hook 'org-mode-hook 'auto-fill-mode)
-(plist-put org-format-latex-options :scale 1.5)
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((dot . t)))
-(add-hook 'text-mode-hook 'auto-fill-mode)
-
 (setq projectile-switch-project-action 'projectile-dired)
-
+(global-set-key (kbd "C-c p A") 'helm-projectile-ag)
 (setq notmuch-search-oldest-first nil)
 
 (ido-vertical-mode t)
@@ -55,6 +48,4 @@
 (eval-after-load 'projectile
                     '(define-key projectile-mode-map (kbd "C-c p a") (lambda () (interactive) (helm-ag))))
 
-(eval-after-load 'evil
-                    '(define-key projectile-mode-map (kbd "C-a") (lambda () (interactive) (evil-numbers/inc-at-pt 1 nil))))
 (global-set-key (kbd "C-c C-j")  (lambda () (interactive) (org-journal-new-entry nil )))

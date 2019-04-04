@@ -38,7 +38,7 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (setq org-log-done t)
 ;;set agenda files
-(setq org-agenda-files (directory-files-recursively "~/Documents/uni_research" "\.org$") )
+(setq org-agenda-files (directory-files-recursively "~/Documents/uni_research/" "\.org$") )
 (defun prelude-org-mode-defaults ()
   (let ((oldmap (cdr (assoc 'prelude-mode minor-mode-map-alist)))
         (newmap (make-sparse-keymap)))

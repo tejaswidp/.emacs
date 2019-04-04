@@ -11,4 +11,4 @@
 (setq erc-autojoin-channels-alist 
       '(("irc.freenode.net" "#emacs" "#python" "#programming") 
         ("irc.rizon.net" "#/g/dpt" "#/g/sicp" "#etc")
-        ("irc.ircnet.net" "#demoscene" "#revision")))
+        ("irc.atw-inter.net" "#demoscene" "#revision"))) 
